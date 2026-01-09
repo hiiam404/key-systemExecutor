@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Amethyst - Key System</title>
+    <style>
+        body { background: #0d0d10; color: white; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .box { background: #15151a; padding: 40px; border-radius: 15px; border: 1px solid #7b2cbf; text-align: center; box-shadow: 0 0 20px rgba(123, 44, 191, 0.2); }
+        h1 { color: #c77dff; }
+        button { background: #7b2cbf; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold; margin-top: 20px; }
+        .key-display { background: #000; padding: 10px; margin-top: 20px; border-radius: 5px; display: none; color: #00ff7f; font-family: monospace; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1>Amethyst Key</h1>
+        <p>Clique no botão abaixo para gerar sua chave de 24h.</p>
+        <button onclick="unlockKey()">Obter Chave via Linkvertise</button>
+        <div id="keyBox" class="key-display"></div>
+    </div>
+
+    <script>
+        function unlockKey() {
+            // URL do seu Linkvertise que aponta de volta para este site com um parâmetro ?passed=true
+            const linkvertiseURL = "SEU_LINK_DO_LINKVERTISE_AQUI";
+            
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('passed')) {
+                // Lógica simples de geração de chave (Data + Prefixo)
+                const date = new Date();
+                const key = "Amethyst_" + date.getDate() + (date.getMonth() + 1) + "_Key";
+                document.getElementById('keyBox').innerText = key;
+                document.getElementById('keyBox').style.display = "block";
+            } else {
+                window.location.href = linkvertiseURL;
+            }
+        }
+    </script>
+</body>
+</html>
